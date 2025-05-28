@@ -1,0 +1,8 @@
+{
+  "suggestionCount": 3,
+  "enableCompletions": true,
+  "enableCopilotChat": true,
+  "languageFilters": ["javascript", "typescript", "python", "json", "markdown"],
+  "excludePaths": ["node_modules/", "dist/", "build/"],
+  "inlineSuggestDelayMs": 150
+}

@@ -1,0 +1,9 @@
+[packages]
+black = "*"
+isort = "*"
+# ...add other Python packages as needed...
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

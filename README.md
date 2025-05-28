@@ -1,3 +1,7 @@
+# Convention App Client
+
+A modern mobile application for managing and attending conventions, built with React Native and Expo. This project aims to provide attendees and organizers with a seamless experience for schedules, announcements, and event participation.
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
@@ -48,3 +52,51 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+# Convention App Client
+
+A modern mobile application for managing and attending conventions, built with React Native and Expo. This project aims to provide attendees and organizers with a seamless experience for schedules, announcements, and event participation.
+
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/convention-app-client.git
+   cd convention-app-client
+   ```
+
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+3. Start the development server:
+   ```sh
+   npm start
+   ```
+
+## Usage
+
+- To run on Android:
+  ```sh
+  npm run android
+  ```
+- To run on iOS:
+  ```sh
+  npm run ios
+  ```
+- To run on web:
+  ```sh
+  npm run web
+  ```
+
+## Contribution Guidelines
+
+1. Fork the repository and create your branch from `main`.
+2. Ensure code is linted and formatted (`npm run lint` and `npm run format`).
+3. Add tests if applicable.
+4. Submit a pull request with a clear description of your changes.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.

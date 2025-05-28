@@ -1,0 +1,37 @@
+# GitHub Actions CI/CD workflow: install, lint, test, (optionally deploy)
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run ci:test
+
+  # Uncomment and configure the following for deployment (example: Expo EAS, Vercel, etc.)
+  # deploy:
+  #   needs: build-and-test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Deploy step (replace with your deployment provider)
+  #       run: echo "Deploying..."

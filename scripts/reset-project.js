@@ -6,7 +6,7 @@
  * You can remove the `reset-project` script from package.json and safely delete this file after running it.
  */
 
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 
 const root = process.cwd();
@@ -42,32 +42,24 @@ export default function RootLayout() {
 }
 `;
 
-fs.rename(oldDirPath, newDirPath, (error) => {
-  if (error) {
-    return console.error(`Error renaming directory: ${error}`);
-  }
-  console.log('/app moved to /app-example.');
+async function resetProject() {
+  try {
+    await fs.rename(oldDirPath, newDirPath);
+    console.log('/app moved to /app-example.');
 
-  fs.mkdir(newAppDirPath, { recursive: true }, (error) => {
-    if (error) {
-      return console.error(`Error creating new app directory: ${error}`);
-    }
+    await fs.mkdir(newAppDirPath, { recursive: true });
     console.log('New /app directory created.');
 
     const indexPath = path.join(newAppDirPath, 'index.tsx');
-    fs.writeFile(indexPath, indexContent, (error) => {
-      if (error) {
-        return console.error(`Error creating index.tsx: ${error}`);
-      }
-      console.log('app/index.tsx created.');
+    await fs.writeFile(indexPath, indexContent);
+    console.log('app/index.tsx created.');
 
-      const layoutPath = path.join(newAppDirPath, '_layout.tsx');
-      fs.writeFile(layoutPath, layoutContent, (error) => {
-        if (error) {
-          return console.error(`Error creating _layout.tsx: ${error}`);
-        }
-        console.log('app/_layout.tsx created.');
-      });
-    });
-  });
-});
+    const layoutPath = path.join(newAppDirPath, '_layout.tsx');
+    await fs.writeFile(layoutPath, layoutContent);
+    console.log('app/_layout.tsx created.');
+  } catch (error) {
+    console.error(`Error: ${error}`);
+  }
+}
+
+resetProject();

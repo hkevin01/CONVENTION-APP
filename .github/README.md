@@ -1,0 +1,3 @@
+# .github
+
+This directory contains GitHub-specific configuration files and workflows.
