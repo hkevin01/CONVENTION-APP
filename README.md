@@ -205,9 +205,9 @@ These are normal warnings from MongoDB's WiredTiger storage engine. They can be 
 
 ## Repository Location
 
-This project is located at:
+This project is hosted on GitHub:
 
-`/home/kevin/Projects/Development/CON/convention-app-client`
+[https://github.com/hkevin01/CONVENTION-APP](https://github.com/hkevin01/CONVENTION-APP)
 
 ## Contribution Guidelines
 
