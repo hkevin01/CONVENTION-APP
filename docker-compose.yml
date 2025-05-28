@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: convention-backend
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/convention-app
+      - JWT_SECRET=your_jwt_secret
+      - PORT=4000
+    depends_on:
+      - mongo
+    volumes:
+      - ./backend:/usr/src/app
+    command: npm run dev
+
+  frontend:
+    build: .
+    container_name: convention-frontend
+    ports:
+      - "8081:8081"
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+    environment:
+      - API_URL=http://localhost:4000/api
+    volumes:
+      - ./:/usr/src/app
+    command: npx expo start --tunnel
+
+  mongo:
+    image: mongo:6
+    container_name: convention-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+
+# To remove the "Watch →  watch is not yet configured" message,
+# either configure the watch option or remove any 'watch:' blocks from your docker-compose.yml.
+
+# Example: Remove or comment out any 'watch:' section like below:
+# services:
+#   frontend:
+#     ...
+#     # watch:
+#     #   - path: ./src
+#     #     action: rebuild
+
+# Or, if you want to use file watching, follow the docs:
+# https://docs.docker.com/compose/file-watch/

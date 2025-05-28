@@ -4,5 +4,22 @@
   "enableCopilotChat": true,
   "languageFilters": ["javascript", "typescript", "python", "json", "markdown"],
   "excludePaths": ["node_modules/", "dist/", "build/"],
-  "inlineSuggestDelayMs": 150
+  "inlineSuggestDelayMs": 150,
+  "projectGoals": [
+    "Modernize the codebase",
+    "Restructure the project for modularity",
+    "Add comprehensive documentation",
+    "Automate testing and deployment"
+  ],
+  "focusAreas": [
+    "Code readability",
+    "Best practices",
+    "Automation integration",
+    "Documentation clarity"
+  ],
+  "excludedFiles": [
+    "node_modules",
+    "build",
+    ".env"
+  ]
 }

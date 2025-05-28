@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
@@ -13,8 +13,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install dependencies
-        run: npm install
-      # Add deployment steps here, e.g., upload to hosting, Expo publish, etc.
-      - name: Deploy step
-        run: echo "Add deployment commands here"
+      - run: npm ci
+      - run: npm run deploy

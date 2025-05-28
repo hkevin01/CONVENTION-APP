@@ -1,18 +1,17 @@
 # Stage 1: Builder
-FROM node:18 AS builder
+FROM node:20 AS builder
 
 # Set environment to development to include devDependencies
 ENV NODE_ENV=development
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Create .npmrc to handle peer dependencies
 RUN echo "legacy-peer-deps=true" > .npmrc
 
 # Copy package files first
 COPY package*.json ./
-COPY tsconfig*.json ./
 
 # Install all dependencies including devDependencies
 RUN npm install --legacy-peer-deps
@@ -52,30 +51,30 @@ RUN mkdir -p node_modules/@react-native/assets-registry && \
 # Clear npm cache
 RUN npm cache clean --force
 
-# Create a non-root user and set ownership
-RUN useradd -m appuser && chown -R appuser:appuser /app
+# Create a non-root user (do NOT chown the entire /usr/src/app, it's slow)
+RUN useradd -m appuser
 
 # Switch to the non-root user
 USER appuser
 
 # Stage 2: Production Environment
-FROM node:18
+FROM node:20
 
 # Set environment variables
 ENV NODE_ENV=production
 ENV EXPO_NO_PROMPT=true
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Create .npmrc for production
 RUN echo "legacy-peer-deps=true" > .npmrc
 
 # Copy everything from builder
-COPY --from=builder /app /app
+COPY --from=builder /usr/src/app /usr/src/app
 
 # Install production dependencies
-RUN npm ci --only=production --legacy-peer-deps
+RUN npm install --omit=dev --legacy-peer-deps
 
 # Install TypeScript globally and locally in production
 RUN npm install -g typescript@5.3.3
@@ -99,16 +98,67 @@ RUN tsc --version || echo "TypeScript version check failed but continuing..."
 # Create a non-root user with a fixed UID and GID
 RUN groupadd -g 1001 appgroup && useradd -u 1001 -g appgroup -m appuser
 
-# Set ownership and permissions
-RUN chown -R appuser:appgroup /app
-RUN chmod -R u+rwX,g+rwX /app
-RUN mkdir -p /app/.expo && chown -R appuser:appgroup /app/.expo
+# Set permissions for the working directory before creating directories
+RUN chmod -R 777 /usr/src/app
+
+# Create .expo directory with full permissions (if not already present)
+RUN mkdir -p /usr/src/app/.expo && chmod -R 777 /usr/src/app/.expo
+
+# Fix Expo permission denied error by ensuring .expo and its parent directory are writable by all users
+RUN rm -rf /usr/src/app/.expo && mkdir -p /usr/src/app/.expo \
+  && chown -R appuser:appgroup /usr/src/app \
+  && chmod -R 777 /usr/src/app \
+  && chmod -R 777 /usr/src/app/.expo
+
+# Remove unnecessary folders and files from the final image to avoid warnings and deprecated content
+RUN rm -rf \
+  .copilot \
+  .github \
+  .vscode \
+  assets \
+  backend \
+  docs \
+  node_modules \
+  scripts \
+  src \
+  .dockerignore \
+  .editorconfig \
+  .env.example \
+  .eslintrc.json \
+  .gitattributes \
+  .gitignore \
+  .prettierrc \
+  app.json \
+  babel.config.js \
+  CHANGELOG.md \
+  CONTRIBUTING.md \
+  docker-compose.yml \
+  LICENSE \
+  package-lock.json \
+  Pipfile \
+  pyproject.toml \
+  README.md \
+  requirements.txt \
+  run-fullstack.sh \
+  scope.md \
+  SECURITY.md \
+  start.sh \
+  STEPS.md \
+  stop-fullstack.sh \
+  tsconfig.json \
+  WORKFLOW.md
 
 # Switch to the non-root user
 USER appuser
 
 # Expose necessary ports
-EXPOSE 3000 19000 19001 19002
+EXPOSE 8081 19000 19001 19002
 
-# Define the command to run the application
-CMD ["npx", "expo", "start", "--tunnel"]
+# Start Expo in interactive mode with web UI enabled
+CMD ["npx", "expo", "start", "--tunnel", "--interactive"]
+
+# Install additional packages if needed
+RUN npm install uuid@^9.0.0 rimraf@^5.0.0 glob@^10.0.0 --legacy-peer-deps
+
+# Optional: Automatically attempt to fix vulnerabilities after npm install steps
+RUN npm audit fix || true

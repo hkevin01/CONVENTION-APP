@@ -1,4 +1,13 @@
+<!--
+  Copilot Focus: This file provides a project summary, installation instructions, usage examples, and contribution guidelines.
+  When editing, keep documentation clear and up to date for new contributors.
+-->
+
 # Convention App Client
+
+[![Frontend Build Status](https://github.com/yourusername/convention-app-client/actions/workflows/build.yml/badge.svg)](https://github.com/yourusername/convention-app-client/actions/workflows/build.yml)
+[![Frontend Test Status](https://github.com/yourusername/convention-app-client/actions/workflows/test.yml/badge.svg)](https://github.com/yourusername/convention-app-client/actions/workflows/test.yml)
+[![Backend Deploy Status](https://github.com/yourusername/convention-app-client/actions/workflows/deploy.yml/badge.svg)](https://github.com/yourusername/convention-app-client/actions/workflows/deploy.yml)
 
 A modern mobile application for managing and attending conventions, built with React Native and Expo. This project aims to provide attendees and organizers with a seamless experience for schedules, announcements, and event participation.
 
@@ -90,6 +99,116 @@ A modern mobile application for managing and attending conventions, built with R
   npm run web
   ```
 
+## Environment Variables
+
+Create a `.env` file at the project root to configure API endpoints and other environment-specific settings. Example:
+
+```env
+API_URL=http://localhost:4000/api
+```
+
+You can access these variables in your code using [expo-constants](https://docs.expo.dev/versions/latest/sdk/constants/) or a library like [`react-native-dotenv`](https://github.com/goatandsheep/react-native-dotenv).
+
+## API Integration
+
+The frontend communicates with the backend via REST APIs. Use `fetch` or `axios` to make requests to the backend endpoints defined in your `.env` file.
+
+Example usage with `axios`:
+
+```js
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: process.env.API_URL,
+});
+
+export async function fetchEvents() {
+  const response = await api.get('/events');
+  return response.data;
+}
+```
+
+## API Client Setup
+
+This project uses [axios](https://github.com/axios/axios) for HTTP requests.
+
+If you see errors like:
+> Cannot find module 'axios' or its corresponding type declarations
+
+Install axios and its types:
+
+```sh
+npm install axios
+npm install --save-dev @types/axios
+```
+
+If you use TypeScript >=4.9, @types/axios may not be needed as axios ships its own types.
+
+## Deployment
+
+### Frontend
+
+- The Expo/React Native frontend can be deployed using [Expo Application Services (EAS)](https://expo.dev/eas), Vercel, or Netlify for web builds.
+- See [Expo deployment docs](https://docs.expo.dev/distribution/introduction/) for details.
+- Environment variables are managed via `.env` files and `app.json`'s `extra` field.
+
+### Backend
+
+- The backend (in `/backend`) can be deployed to Heroku, AWS, DigitalOcean, or any cloud/VPS provider.
+- Ensure environment variables (e.g., `MONGO_URI`, `JWT_SECRET`) are set securely in your deployment environment.
+- See `/backend/README.md` for backend deployment instructions.
+
+### CI/CD
+
+- GitHub Actions workflows are set up for build, test, and deploy for both frontend and backend.
+- Secrets and environment variables for CI/CD should be configured in your repository settings.
+
+## Running Locally with Docker
+
+You have two main options:
+
+### 1. Using Docker Compose (Recommended for Full Stack)
+
+This will start the frontend, backend, and MongoDB together:
+
+```sh
+./start.sh
+```
+or
+```sh
+docker-compose up --build
+```
+
+### 2. Building and Running the Frontend Dockerfile Directly
+
+If you only want to run the frontend container:
+
+```sh
+docker build -t convention-frontend .
+docker run -p 8081:8081 -p 19000:19000 -p 19001:19001 -p 19002:19002 convention-frontend
+```
+
+> **Note:**  
+> The frontend expects the backend and MongoDB to be running and accessible at the URLs specified in your `.env` or Docker Compose configuration.  
+> For a fully working environment, use Docker Compose as described above.
+
+## Known Warnings and Errors
+
+### MongoDB WiredTiger Checkpointer
+
+You may see logs like:
+```
+[...]
+```
+
+These are normal warnings from MongoDB's WiredTiger storage engine. They can be safely ignored unless you experience actual data access issues.
+
+## Repository Location
+
+This project is located at:
+
+`/home/kevin/Projects/Development/CON/convention-app-client`
+
 ## Contribution Guidelines
 
 1. Fork the repository and create your branch from `main`.
@@ -100,3 +219,55 @@ A modern mobile application for managing and attending conventions, built with R
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## Cloning the Repository with GitHub CLI
+
+To clone this project using the GitHub CLI, run:
+
+```sh
+gh repo clone hkevin01/CONVENTION-APP
+cd CONVENTION-APP
+```
+
+## GitHub CLI Configuration
+
+This project supports the [GitHub CLI](https://cli.github.com/).
+
+### Useful GitHub CLI Commands
+
+- Clone the repo:
+  ```sh
+  gh repo clone hkevin01/CONVENTION-APP
+  cd CONVENTION-APP
+  ```
+
+- Create a new issue:
+  ```sh
+  gh issue create --title "Bug: ..." --body "Describe the bug..."
+  ```
+
+- Create a pull request:
+  ```sh
+  gh pr create --fill
+  ```
+
+- View repo status:
+  ```sh
+  gh repo view --web
+  ```
+
+### GitHub CLI Dotfiles
+
+A `.github` folder is already present for workflows.  
+You can add GitHub CLI configuration in your home directory as needed:
+
+- `~/.config/gh/hosts.yml` (for authentication)
+- `~/.config/gh/config.yml` (for CLI settings)
+
+See [GitHub CLI docs](https://cli.github.com/manual/) for more.
+
+## After Pushing to GitHub
+
+After you push your changes, you can view your repository at:
+
+[https://github.com/hkevin01/CONVENTION-APP](https://github.com/hkevin01/CONVENTION-APP)

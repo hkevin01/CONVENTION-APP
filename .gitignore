@@ -13,26 +13,48 @@ build/
 expo-build/
 web-build/
 
-# Expo
+# Environment files
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Expo private files
 .expo/
 .expo-shared/
+
+# Expo credentials and keys
+*.keystore
+*.jks
+*.p12
+*.key
+*.pem
+*.crt
+
+# Miscellaneous private files
+*.secret
+*.bak
+*.tmp
+*.swp
+
+# IDE/editor settings
+.vscode/
+.idea/
 
 # OS files
 .DS_Store
 Thumbs.db
 
-# Environment files
-.env
-.env.*
-
-# IDEs
-.vscode/
-.idea/
-*.swp
-
-# Misc
+# Coverage
 coverage/
+
+# Test output
 *.log
 
-# macOS
-.DS_Store
+# Private Expo config
+app.config.local.*
+
+# GitHub CLI config (user-specific, not committed)
+.gh/

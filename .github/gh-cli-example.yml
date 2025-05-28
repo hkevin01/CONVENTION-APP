@@ -1,0 +1,12 @@
+# Example GitHub CLI configuration for this project (not required for builds)
+
+# To authenticate:
+#   gh auth login
+
+# To set a default editor:
+#   gh config set editor "code --wait"
+
+# To set a default repo:
+#   gh config set repo hkevin01/CONVENTION-APP
+
+# See https://cli.github.com/manual/gh_config for more options.
