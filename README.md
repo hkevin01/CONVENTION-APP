@@ -271,3 +271,16 @@ See [GitHub CLI docs](https://cli.github.com/manual/) for more.
 After you push your changes, you can view your repository at:
 
 [https://github.com/hkevin01/CONVENTION-APP](https://github.com/hkevin01/CONVENTION-APP)
+
+## How to Approve (Okay) a Commit or Pull Request on GitHub
+
+1. Go to your repository on [GitHub](https://github.com/hkevin01/CONVENTION-APP).
+2. Click on the "Pull requests" tab.
+3. Select the pull request you want to review.
+4. Review the changes (files, diffs, etc.).
+5. Click the "Review changes" button (top right).
+6. Choose "Approve" and optionally add a comment.
+7. Click "Submit review".
+
+If you want to merge the pull request after approving:
+- Click the "Merge pull request" button.
