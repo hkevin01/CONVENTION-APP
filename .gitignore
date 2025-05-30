@@ -1,17 +1,35 @@
-# Node modules
-node_modules/
+# macOS system files
+.DS_Store
 
-# Logs
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux system files
+*~
+
+# VSCode settings
+.vscode/
+.history/
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# npm package logs
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 
-# Build output
-dist/
+# Test, coverage, and build output
+coverage/
 build/
+dist/
 expo-build/
 web-build/
+*.log
 
 # Environment files
 .env
@@ -39,22 +57,37 @@ web-build/
 *.tmp
 *.swp
 
-# IDE/editor settings
-.vscode/
-.idea/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Coverage
-coverage/
-
-# Test output
-*.log
-
 # Private Expo config
 app.config.local.*
 
 # GitHub CLI config (user-specific, not committed)
 .gh/
+.github/
+
+# Output/log files
+output.log
+
+# Node modules
+node_modules/
+
+# Python virtualenv
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Pipenv
+Pipfile.lock
+
+# OS trash
+.Trash-*
+
+# Editor swap/backup files
+*.sublime-workspace
+*.sublime-project
+*.bak
+*.tmp
+*.swp
+*~
+
+# End of file
