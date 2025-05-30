@@ -1,0 +1,135 @@
+{
+  "scope": {
+    "description": "Convention App Client is a full-stack project for managing and attending conventions, featuring a React Native/Expo frontend and a Node.js/Express/MongoDB backend. It supports user authentication, event management, announcements, user profiles, and ticketing/check-in.",
+    "main_technologies": [
+      "React Native",
+      "Expo",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "TypeScript",
+      "Docker",
+      "GitHub Actions"
+    ]
+  },
+  "structure": {
+    "root": [
+      "src/",
+      "backend/",
+      "assets/",
+      "docs/",
+      "scripts/",
+      "json/",
+      ".github/",
+      ".copilot/",
+      "package.json",
+      "README.md",
+      "start.sh",
+      "stop.sh"
+    ],
+    "src/": {
+      "purpose": "Frontend source code (React Native/Expo)",
+      "key_files": [
+        "app/ - App entry and routing",
+        "components/ - Reusable UI components",
+        "constants/ - App-wide constants (e.g., Colors, API URLs)",
+        "hooks/ - Custom React hooks",
+        "api/ - API client and endpoint wrappers"
+      ]
+    },
+    "scripts/": {
+      "purpose": "Utility scripts for project setup and maintenance",
+      "key_files": [
+        "run-fullstack.sh - Main script to start all services"
+      ]
+    },
+    "backend/": {
+      "purpose": "Backend API (Node.js/Express)",
+      "key_files": [
+        "server.js - Express app entrypoint",
+        "src/models/ - Mongoose models (User, Event, Ticket, Announcement)",
+        "src/routes/ - Express route handlers (auth, events, announcements, profile, tickets)"
+      ]
+    },
+    "assets/": {
+      "purpose": "Static assets (images, fonts, icons) for Expo/React Native"
+    },
+    "docs/": {
+      "purpose": "Documentation (API, guides, deployment, troubleshooting, OpenAPI spec)"
+    },
+    ".github/": {
+      "purpose": "GitHub Actions workflows for CI/CD, issue templates"
+    },
+    ".copilot/": {
+      "purpose": "GitHub Copilot configuration and documentation"
+    },
+    "json/": {
+      "purpose": "JSON configuration and data files",
+      "key_files": [
+        "code_map.json - Project structure and relationships map",
+        "config.json - Application configuration settings",
+        "colors.json - Theme color definitions"
+      ]
+    }
+  },
+  "dependencies": {
+    "frontend": [
+      "react",
+      "react-native",
+      "expo",
+      "expo-router",
+      "expo-splash-screen",
+      "expo-web-browser",
+      "axios"
+    ],
+    "backend": [
+      "express",
+      "mongoose",
+      "cors",
+      "dotenv",
+      "jsonwebtoken",
+      "bcryptjs",
+      "nodemon (dev)"
+    ],
+    "dev": [
+      "typescript",
+      "@types/react",
+      "@types/react-native",
+      "eslint",
+      "prettier"
+    ],
+    "tooling": [
+      "Docker",
+      "GitHub Actions"
+    ]
+  },
+  "file_purpose": {
+    "src/app/": "App entry, routing, and screens for the Expo frontend.",
+    "src/components/": "Reusable UI components (ThemedText, ThemedView, Collapsible, etc).",
+    "src/constants/": "Color schemes, API URLs, and other constants.",
+    "src/hooks/": "Custom React hooks for theme, color scheme, etc.",
+    "src/api/": "API client setup and endpoint wrappers.",
+    "scripts/run-fullstack.sh": "Orchestration script to run the entire stack for development.",
+    "backend/server.js": "Express server setup and route mounting.",
+    "backend/src/models/": "Mongoose schemas for User, Event, Ticket, Announcement.",
+    "backend/src/routes/": "Express route handlers for API endpoints.",
+    "Dockerfile": "Build instructions for frontend Docker image.",
+    "backend/Dockerfile": "Build instructions for backend Docker image.",
+    "docker-compose.yml": "Orchestrates frontend, backend, and MongoDB containers.",
+    "package.json": "Frontend dependencies and scripts.",
+    "backend/package.json": "Backend dependencies and scripts.",
+    ".github/workflows/": "CI/CD pipelines for build, test, deploy.",
+    ".copilot/": "Copilot configuration and focus files.",
+    "README.md": "Project overview, setup, usage, and contribution guide.",
+    "json/code_map.json": "Project structure map and documentation.",
+    "json/config.json": "Application configuration settings."
+  },
+  "relationships": {
+    "frontend-backend": "Frontend communicates with backend via REST API (API_URL in env/app.json).",
+    "backend-mongo": "Backend uses Mongoose to connect to MongoDB.",
+    "docker-compose": "Used by scripts/run-fullstack.sh to orchestrate frontend, backend, and MongoDB for local development.",
+    "scripts-execution": "start.sh provides a convenient shortcut to scripts/run-fullstack.sh; stop-fullstack.sh terminates the processes.",
+    "CI/CD": "GitHub Actions run tests and builds on push/pull_request.",
+    "Copilot": "Copilot config and prompts guide AI code suggestions."
+  }
+}

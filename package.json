@@ -4,7 +4,11 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "expo start",
+    "start": "./scripts/run-fullstack.sh",
+    "stop": "./scripts/stop-fullstack.sh",
+    "docker:build": "docker-compose -f ./docker/docker-compose.yml build",
+    "docker:up": "docker-compose -f ./docker/docker-compose.yml up",
+    "docker:down": "docker-compose -f ./docker/docker-compose.yml down",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",

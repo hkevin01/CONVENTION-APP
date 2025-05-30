@@ -1,0 +1,25 @@
+{
+  "app": {
+    "name": "Convention App",
+    "version": "1.0.0",
+    "description": "Mobile application for managing and attending conventions"
+  },
+  "api": {
+    "baseUrl": "http://localhost:4000/api",
+    "timeout": 5000,
+    "retryAttempts": 3
+  },
+  "theme": {
+    "primaryColor": "#007aff",
+    "secondaryColor": "#5856d6",
+    "backgroundColor": "#f2f2f7",
+    "textColor": "#1c1c1e",
+    "errorColor": "#ff3b30",
+    "successColor": "#34c759"
+  },
+  "features": {
+    "darkMode": true,
+    "notifications": true,
+    "offlineMode": true
+  }
+}

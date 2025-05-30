@@ -1,0 +1,83 @@
+{
+  "scope": {
+    "description": "Convention App Client is a full-stack project for managing and attending conventions, featuring a React Native/Expo frontend and a Node.js/Express/MongoDB backend. It supports user authentication, event management, announcements, user profiles, and ticketing/check-in.",
+    "main_technologies": [
+      "React Native",
+      "Expo",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "TypeScript",
+      "Docker",
+      "GitHub Actions"
+    ]
+  },
+  "structure": {
+    "root": [
+      "src/",
+      "backend/",
+      "assets/",
+      "docs/",
+      "scripts/",
+      "docker/",
+      ".github/",
+      ".copilot/",
+      "package.json",
+      "README.md",
+      "start.sh",
+      "stop.sh"
+    ],
+    "src/": {
+      "purpose": "Frontend source code (React Native/Expo)",
+      "key_files": [
+        "app/ - App entry and routing",
+        "components/ - Reusable UI components",
+        "constants/ - App-wide constants (e.g., Colors, API URLs)",
+        "hooks/ - Custom React hooks",
+        "api/ - API client and endpoint wrappers"
+      ]
+    },
+    "scripts/": {
+      "purpose": "Utility scripts for project setup and maintenance",
+      "key_files": [
+        "run-fullstack.sh - Main script to start all services",
+        "stop-fullstack.sh - Script to stop all services",
+        "git-info-and-set-remote.sh - Script to configure git remote"
+      ]
+    },
+    "docker/": {
+      "purpose": "Docker configuration files",
+      "key_files": [
+        "docker-compose.yml - Main Docker Compose configuration",
+        "frontend/Dockerfile - Frontend container configuration",
+        "backend/Dockerfile - Backend container configuration"
+      ]
+    },
+    "docs/": {
+      "purpose": "Project documentation",
+      "key_files": [
+        "api.md - API documentation",
+        "CONTRIBUTING.md - Contribution guidelines",
+        "WORKFLOW.md - Development workflow documentation",
+        "code_map.json - Project structure map",
+        "openapi.yaml - OpenAPI specification"
+      ]
+    },
+    "backend/": {
+      "purpose": "Backend API (Node.js/Express)",
+      "key_files": [
+        "server.js - Express app entrypoint",
+        "src/models/ - Mongoose models (User, Event, Ticket, Announcement)",
+        "src/routes/ - Express route handlers (auth, events, announcements, profile, tickets)"
+      ]
+    }
+  },
+  "relationships": {
+    "frontend-backend": "Frontend communicates with backend via REST API (API_URL in env/app.json).",
+    "backend-mongo": "Backend uses Mongoose to connect to MongoDB.",
+    "docker-compose": "Used by scripts/run-fullstack.sh to orchestrate frontend, backend, and MongoDB for local development.",
+    "scripts-execution": "start.sh provides a convenient shortcut to scripts/run-fullstack.sh; stop.sh terminates the processes.",
+    "CI/CD": "GitHub Actions run tests and builds on push/pull_request.",
+    "Copilot": "Copilot config and prompts guide AI code suggestions."
+  }
+}

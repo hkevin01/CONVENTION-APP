@@ -1,0 +1,36 @@
+{
+  "core_config_files": {
+    "package.json": {
+      "location": "project root",
+      "purpose": "Node.js/npm package configuration, dependencies, and scripts",
+      "cannot_move": true,
+      "reason": "Required at root by npm, yarn, and Node.js ecosystem"
+    },
+    "tsconfig.json": {
+      "location": "project root",
+      "purpose": "TypeScript compiler configuration",
+      "cannot_move": true,
+      "reason": "Required at root by TypeScript compiler and IDE integrations"
+    },
+    "app.json": {
+      "location": "project root",
+      "purpose": "Expo application configuration",
+      "cannot_move": true,
+      "reason": "Required at root by Expo CLI and build process"
+    }
+  },
+  "movable_json_files": {
+    "code_map.json": {
+      "location": "json/code_map.json",
+      "purpose": "Project structure documentation"
+    },
+    "config.json": {
+      "location": "json/config.json",
+      "purpose": "Application runtime configuration"
+    },
+    "colors.json": {
+      "location": "json/colors.json",
+      "purpose": "Theme color definitions"
+    }
+  }
+}

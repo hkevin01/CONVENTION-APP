@@ -1,4 +1,5 @@
 #!/bin/bash
-# Script to start the full stack (frontend + backend + mongo) using Docker Compose
+# Wrapper script to run the fullstack development environment
 
-docker-compose up --build
+# Forward to the main script in the scripts directory
+exec ./scripts/run-fullstack.sh

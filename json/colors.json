@@ -1,0 +1,26 @@
+{
+  "light": {
+    "primary": "#007aff",
+    "secondary": "#5856d6",
+    "background": "#f2f2f7",
+    "card": "#ffffff",
+    "text": "#1c1c1e",
+    "border": "#c7c7cc",
+    "notification": "#ff3b30",
+    "success": "#34c759",
+    "warning": "#ffcc00",
+    "info": "#5ac8fa"
+  },
+  "dark": {
+    "primary": "#0a84ff",
+    "secondary": "#5e5ce6",
+    "background": "#1c1c1e",
+    "card": "#2c2c2e",
+    "text": "#ffffff",
+    "border": "#38383a",
+    "notification": "#ff453a",
+    "success": "#30d158",
+    "warning": "#ffd60a",
+    "info": "#64d2ff"
+  }
+}
