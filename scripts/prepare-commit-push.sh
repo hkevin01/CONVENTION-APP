@@ -81,17 +81,6 @@ execute_git_commands() {
   echo "  EXECUTING GIT COMMANDS"
   echo "======================================================"
   
-  echo "Would you like to execute the git commands now? (y/n)"
-  read -p "> " execute_choice
-  
-  if [[ "$execute_choice" != "y" && "$execute_choice" != "Y" ]]; then
-    echo "Skipping command execution. You can run these commands manually:"
-    echo "  git add ."
-    echo "  git commit -F /tmp/commit_msg.txt"
-    echo "  git push -u origin main"
-    return 0
-  fi
-  
   echo
   echo "Step 1/3: Adding all changes..."
   git add .
@@ -107,40 +96,83 @@ execute_git_commands() {
   echo "Would you like to try the normal push or verbose push with progress? (normal/verbose)"
   read -p "> " push_choice
   
+  push_success=false
+  
   if [[ "$push_choice" == "verbose" ]]; then
     echo "Pushing with verbose output and progress..."
-    git push -u origin main --verbose --progress
+    if git push -u origin main --verbose --progress; then
+      push_success=true
+    fi
   else
     echo "Pushing normally..."
-    git push -u origin main
+    if git push -u origin main; then
+      push_success=true
+    fi
   fi
   
-  echo "✓ Push complete!"
-  return 0
+  if [ "$push_success" = true ]; then
+    echo "✓ Push complete!"
+    return 0
+  else
+    echo "! Push failed. Let's handle this situation."
+    handle_push_failure
+    return 1
+  fi
 }
 
-# Function to show alternative steps if push fails
-show_alternative_steps() {
+# Function to handle push failure
+handle_push_failure() {
+  echo
   echo "======================================================"
-  echo "  ALTERNATIVE APPROACHES IF PUSH FAILS"
+  echo "  HANDLING PUSH FAILURE"
   echo "======================================================"
   echo
-  echo "If the push operation fails or hangs, try these alternatives:"
+  echo "Your push was rejected. This typically happens when:"
+  echo "1. The remote repository has changes you don't have locally"
+  echo "2. Another branch was merged to main since your last pull"
   echo
-  echo "1. Push with verbose output:"
-  echo "   GIT_TRACE=1 git push -u origin main"
+  echo "Choose how you want to proceed:"
+  echo "1) Pull changes and merge (git pull)"
+  echo "2) Pull changes and rebase (git pull --rebase)"
+  echo "3) Force push your changes (WARNING: overwrites remote history)"
+  echo "4) Exit without pushing (handle manually later)"
   echo
-  echo "2. Push with progress reporting and limited speed:"
-  echo "   git push -u origin main --verbose --progress"
-  echo
-  echo "3. Try pushing just the restructuring commit first:"
-  echo "   git push -u origin main --force-with-lease"
-  echo
-  echo "4. As a last resort, create a fresh clone and copy files:"
-  echo "   git clone https://github.com/hkevin01/CONVENTION-APP.git new-repo"
-  echo "   cp -r <restructured_files> new-repo/"
-  echo "   cd new-repo && git add . && git commit && git push"
-  echo
+  read -p "Select an option (1-4): " resolve_choice
+  
+  case $resolve_choice in
+    1)
+      echo "Pulling changes and merging..."
+      git pull origin main
+      echo "Now trying to push again..."
+      git push -u origin main
+      ;;
+    2)
+      echo "Pulling changes with rebase..."
+      git pull --rebase origin main
+      echo "Now trying to push again..."
+      git push -u origin main
+      ;;
+    3)
+      echo "WARNING: Force pushing will overwrite remote changes!"
+      echo "This is potentially destructive if others have based work on those changes."
+      read -p "Are you ABSOLUTELY sure? (yes/no): " force_confirm
+      if [[ "$force_confirm" == "yes" ]]; then
+        echo "Force pushing changes..."
+        git push -u origin main --force-with-lease
+      else
+        echo "Force push cancelled."
+      fi
+      ;;
+    4)
+      echo "Exiting without pushing. You can resolve this manually with:"
+      echo "  git pull origin main         # To merge remote changes"
+      echo "  git pull --rebase origin main # To rebase on remote changes"
+      echo "  git push -u origin main --force-with-lease # To force push (use with caution)"
+      ;;
+    *)
+      echo "Invalid option. Exiting without pushing."
+      ;;
+  esac
 }
 
 # Main function
