@@ -1,9 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es6", "dom"],
-    "typeRoots": ["./node_modules/@types"],
-    "jsx": "react-native",
+    "target": "es2018",
+    "lib": [
+      "es2018",
+      "dom",
+      "esnext"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "src/*"
+      ]
+    },
     "module": "esnext",
     "moduleResolution": "node",
     "allowJs": true,
@@ -17,6 +25,16 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "extends": "expo/tsconfig.base"
 }

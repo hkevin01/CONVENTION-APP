@@ -189,4 +189,37 @@ echo "Cleanup completed successfully!"
 echo "Run 'npm install' to restore node_modules if needed."
 echo
 
+# Script to clean up unused files in the Convention App project
+echo "Starting cleanup process..."
+
+# Remove common temporary files
+find . -name "*.log" -type f -delete
+find . -name ".DS_Store" -type f -delete
+find . -name "*.swp" -type f -delete
+find . -name "*~" -type f -delete
+
+# Remove build artifacts
+echo "Removing build artifacts..."
+rm -rf android/build
+rm -rf ios/build
+rm -rf dist
+rm -rf .expo
+rm -rf web-build
+
+# Clean npm cache and remove node_modules (optional)
+echo "Cleaning npm cache..."
+npm cache clean --force
+
+# Optionally prompt to remove node_modules
+read -p "Remove node_modules folder? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  echo "Removing node_modules..."
+  rm -rf node_modules
+  echo "Run 'npm install' to reinstall dependencies."
+fi
+
+echo "Cleanup completed!"
+
 exit 0
