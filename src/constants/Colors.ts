@@ -7,6 +7,7 @@ const Colors = {
     border: '#e0e0e0',
     card: '#f8f8f8',
     error: '#ff3b30',
+    tint: '#007aff',
   },
   dark: {
     text: '#f8f8f8',
@@ -16,6 +17,7 @@ const Colors = {
     border: '#333333',
     card: '#232323',
     error: '#ff453a',
+    tint: '#0a84ff',
   },
 };
 
