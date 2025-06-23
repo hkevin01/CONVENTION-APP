@@ -1,286 +1,577 @@
-<!--
-  Copilot Focus: This file provides a project summary, installation instructions, usage examples, and contribution guidelines.
-  When editing, keep documentation clear and up to date for new contributors.
--->
+# Convention App 🎭
 
-# Convention App Client
+[![Build Status](https://github.com/hkevin01/CONVENTION-APP/actions/workflows/build.yml/badge.svg)](https://github.com/hkevin01/CONVENTION-APP/actions/workflows/build.yml)
+[![Test Status](https://github.com/hkevin01/CONVENTION-APP/actions/workflows/test.yml/badge.svg)](https://github.com/hkevin01/CONVENTION-APP/actions/workflows/test.yml)
+[![Deploy Status](https://github.com/hkevin01/CONVENTION-APP/actions/workflows/deploy.yml/badge.svg)](https://github.com/hkevin01/CONVENTION-APP/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Frontend Build Status](https://github.com/yourusername/convention-app-client/actions/workflows/build.yml/badge.svg)](https://github.com/yourusername/convention-app-client/actions/workflows/build.yml)
-[![Frontend Test Status](https://github.com/yourusername/convention-app-client/actions/workflows/test.yml/badge.svg)](https://github.com/yourusername/convention-app-client/actions/workflows/test.yml)
-[![Backend Deploy Status](https://github.com/yourusername/convention-app-client/actions/workflows/deploy.yml/badge.svg)](https://github.com/yourusername/convention-app-client/actions/workflows/deploy.yml)
+A comprehensive full-stack mobile and web application designed to revolutionize the convention experience. Built with React Native, Expo, Node.js, and MongoDB, this platform provides a seamless digital ecosystem for convention attendees, organizers, and vendors.
 
-A modern mobile application for managing and attending conventions, built with React Native and Expo. This project aims to provide attendees and organizers with a seamless experience for schedules, announcements, and event participation.
+## 🌟 Key Features
 
-# Welcome to your Expo app 👋
+### For Attendees
+- **Event Discovery**: Browse and search through convention schedules, workshops, and special events
+- **Personal Agenda**: Create custom schedules and receive smart notifications
+- **Interactive Maps**: Navigate convention venues with ease
+- **Real-time Updates**: Instant announcements and schedule changes
+- **Social Features**: Connect with other attendees and share experiences
+- **Digital Tickets**: Secure QR code-based entry system
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+### For Organizers
+- **Event Management**: Comprehensive dashboard for creating and managing events
+- **Attendee Analytics**: Real-time insights and engagement metrics
+- **Announcement System**: Broadcast updates instantly to all users
+- **Vendor Coordination**: Streamlined communication with exhibitors
+- **Resource Planning**: Track capacity, schedules, and logistics
 
-## Get started
+### For Vendors/Exhibitors
+- **Booth Management**: Digital presence with multimedia content
+- **Lead Capture**: Collect and manage prospect information
+- **Product Showcase**: Interactive catalogs and demonstrations
+- **Networking Tools**: Connect with attendees and other vendors
 
-1. Install dependencies
+## 🏗️ Architecture
 
+This is a modern full-stack application with:
+
+- **Frontend**: React Native with Expo for cross-platform mobile development
+- **Backend**: Node.js with Express.js for robust API services
+- **Database**: MongoDB for flexible, scalable data storage
+- **Real-time**: WebSocket support for live updates
+- **Authentication**: JWT-based secure user management
+- **File Storage**: Cloud-based asset management
+- **Deployment**: Docker containerization with CI/CD pipelines
+
+## 📱 Platform Support
+
+- **iOS**: Native iOS app via Expo
+- **Android**: Native Android app via Expo  
+- **Web**: Progressive Web App (PWA) support
+- **Tablet**: Optimized layouts for larger screens
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- Expo CLI (`npm install -g @expo/cli`)
+- MongoDB (local installation or cloud service)
+- Git
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   gh repo clone hkevin01/CONVENTION-APP
+   cd CONVENTION-APP
+   ```
+
+2. **Install frontend dependencies:**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+3. **Install backend dependencies:**
    ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-
-# Convention App Client
-
-A modern mobile application for managing and attending conventions, built with React Native and Expo. This project aims to provide attendees and organizers with a seamless experience for schedules, announcements, and event participation.
-
-## Installation
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/convention-app-client.git
-   cd convention-app-client
-   ```
-
-2. Install dependencies:
-   ```sh
+   cd backend
    npm install
+   cd ..
    ```
 
-3. Start the development server:
-   ```sh
+4. **Set up environment variables:**
+   
+   Create `.env` in the root directory:
+   ```env
+   API_URL=http://localhost:4000/api
+   EXPO_PUBLIC_API_URL=http://localhost:4000/api
+   ```
+   
+   Create `backend/.env`:
+   ```env
+   PORT=4000
+   MONGODB_URI=mongodb://localhost:27017/convention-app
+   JWT_SECRET=your-secret-key-here
+   NODE_ENV=development
+   ```
+
+5. **Start the full stack application:**
+   ```bash
+   npm run fullstack
+   ```
+   
+   Or start services individually:
+   ```bash
+   # Terminal 1 - Backend
+   cd backend && npm run dev
+   
+   # Terminal 2 - Frontend  
    npm start
    ```
 
-## Usage
+### Development Options
 
-- To run on Android:
-  ```sh
-  npm run android
+- **Mobile Development (Expo Go):**
+  ```bash
+  npm start
+  # Scan QR code with Expo Go app
   ```
-- To run on iOS:
-  ```sh
+
+- **iOS Simulator:**
+  ```bash
   npm run ios
   ```
-- To run on web:
-  ```sh
+
+- **Android Emulator:**
+  ```bash
+  npm run android
+  ```
+
+- **Web Browser:**
+  ```bash
   npm run web
   ```
 
-## Environment Variables
+## 🔧 Configuration
 
-Create a `.env` file at the project root to configure API endpoints and other environment-specific settings. Example:
+### Environment Variables
 
+The application uses environment variables for configuration. Create the following files:
+
+**Root `.env` (Frontend):**
 ```env
+# API Configuration
 API_URL=http://localhost:4000/api
+EXPO_PUBLIC_API_URL=http://localhost:4000/api
+
+# Feature Flags
+EXPO_PUBLIC_ENABLE_DEV_TOOLS=true
+EXPO_PUBLIC_ENABLE_ANALYTICS=false
+
+# Push Notifications (optional)
+EXPO_PUBLIC_PUSH_NOTIFICATION_KEY=your-expo-push-key
 ```
 
-You can access these variables in your code using [expo-constants](https://docs.expo.dev/versions/latest/sdk/constants/) or a library like [`react-native-dotenv`](https://github.com/goatandsheep/react-native-dotenv).
+**`backend/.env` (Backend):**
+```env
+# Server Configuration
+PORT=4000
+NODE_ENV=development
 
-## API Integration
+# Database
+MONGODB_URI=mongodb://localhost:27017/convention-app
 
-The frontend communicates with the backend via REST APIs. Use `fetch` or `axios` to make requests to the backend endpoints defined in your `.env` file.
+# Authentication
+JWT_SECRET=your-super-secret-jwt-key-here
+JWT_EXPIRES_IN=7d
 
-Example usage with `axios`:
+# CORS
+CORS_ORIGIN=http://localhost:8081,exp://192.168.1.100:8081
 
-```js
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: process.env.API_URL,
-});
-
-export async function fetchEvents() {
-  const response = await api.get('/events');
-  return response.data;
-}
+# File Upload (optional)
+UPLOAD_MAX_SIZE=5MB
+ALLOWED_FILE_TYPES=image/jpeg,image/png,application/pdf
 ```
 
-## API Client Setup
+### Database Setup
 
-This project uses [axios](https://github.com/axios/axios) for HTTP requests.
+1. **Local MongoDB:**
+   ```bash
+   # Install MongoDB locally
+   brew install mongodb/brew/mongodb-community  # macOS
+   sudo apt install mongodb  # Ubuntu
+   
+   # Start MongoDB service
+   mongod
+   ```
 
-If you see errors like:
-> Cannot find module 'axios' or its corresponding type declarations
+2. **MongoDB Atlas (Cloud):**
+   - Create account at [MongoDB Atlas](https://www.mongodb.com/atlas)
+   - Create cluster and get connection string
+   - Update `MONGODB_URI` in `backend/.env`
 
-Install axios and its types:
+## 📊 API Documentation
 
-```sh
-npm install axios
-npm install --save-dev @types/axios
+The backend provides RESTful APIs for all functionality:
+
+### Authentication Endpoints
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User authentication
+- `POST /api/auth/refresh` - Refresh JWT token
+- `POST /api/auth/logout` - User logout
+
+### Event Management
+- `GET /api/events` - List all events
+- `GET /api/events/:id` - Get event details
+- `POST /api/events` - Create new event (organizers only)
+- `PUT /api/events/:id` - Update event (organizers only)
+- `DELETE /api/events/:id` - Delete event (organizers only)
+
+### User Profile
+- `GET /api/profile` - Get user profile
+- `PUT /api/profile` - Update user profile
+- `POST /api/profile/avatar` - Upload profile picture
+
+### Announcements
+- `GET /api/announcements` - Get announcements
+- `POST /api/announcements` - Create announcement (organizers only)
+
+### Tickets
+- `GET /api/tickets` - Get user tickets
+- `POST /api/tickets/purchase` - Purchase event ticket
+- `GET /api/tickets/:id/qr` - Get QR code for ticket
+
+For detailed API documentation, see [`docs/api.md`](docs/api.md).
+
+## 🐳 Docker Development
+
+### Using Docker Compose (Recommended)
+
+Run the full stack with one command:
+
+```bash
+# Build and start all services
+npm run docker:up
+
+# Or use docker-compose directly
+docker-compose -f docker/docker-compose.yml up --build
 ```
 
-If you use TypeScript >=4.9, @types/axios may not be needed as axios ships its own types.
+This starts:
+- Frontend (React Native web) on port 8081
+- Backend API on port 4000  
+- MongoDB on port 27017
 
-## Deployment
+### Individual Container Management
 
-### Frontend
+```bash
+# Build all containers
+npm run docker:build
 
-- The Expo/React Native frontend can be deployed using [Expo Application Services (EAS)](https://expo.dev/eas), Vercel, or Netlify for web builds.
-- See [Expo deployment docs](https://docs.expo.dev/distribution/introduction/) for details.
-- Environment variables are managed via `.env` files and `app.json`'s `extra` field.
+# Start services
+npm run docker:up
 
-### Backend
+# Stop services
+npm run docker:down
 
-- The backend (in `/backend`) can be deployed to Heroku, AWS, DigitalOcean, or any cloud/VPS provider.
-- Ensure environment variables (e.g., `MONGO_URI`, `JWT_SECRET`) are set securely in your deployment environment.
-- See `/backend/README.md` for backend deployment instructions.
+# View logs
+docker-compose -f docker/docker-compose.yml logs -f
 
-### CI/CD
-
-- GitHub Actions workflows are set up for build, test, and deploy for both frontend and backend.
-- Secrets and environment variables for CI/CD should be configured in your repository settings.
-
-## Running Locally with Docker
-
-You have two main options:
-
-### 1. Using Docker Compose (Recommended for Full Stack)
-
-This will start the frontend, backend, and MongoDB together:
-
-```sh
-./start.sh
-```
-or
-```sh
-docker-compose up --build
+# Access container shell
+docker-compose -f docker/docker-compose.yml exec backend bash
 ```
 
-### 2. Building and Running the Frontend Dockerfile Directly
+### Frontend Only Docker
 
-If you only want to run the frontend container:
-
-```sh
+```bash
+# Build frontend container
 docker build -t convention-frontend .
-docker run -p 8081:8081 -p 19000:19000 -p 19001:19001 -p 19002:19002 convention-frontend
+
+# Run with port mapping
+docker run -p 8081:8081 -p 19000:19000 -p 19001:19001 convention-frontend
 ```
 
-> **Note:**  
-> The frontend expects the backend and MongoDB to be running and accessible at the URLs specified in your `.env` or Docker Compose configuration.  
-> For a fully working environment, use Docker Compose as described above.
+## 🚀 Deployment
 
-## Known Warnings and Errors
+### Production Environment Setup
 
-### MongoDB WiredTiger Checkpointer
+1. **Frontend (Expo/EAS):**
+   ```bash
+   # Install EAS CLI
+   npm install -g eas-cli
+   
+   # Login to Expo
+   eas login
+   
+   # Configure build
+   eas build:configure
+   
+   # Build for production
+   eas build --platform all
+   
+   # Submit to app stores
+   eas submit
+   ```
 
-You may see logs like:
+2. **Backend (Node.js):**
+   - Deploy to Heroku, AWS, DigitalOcean, or any Node.js hosting
+   - Set production environment variables
+   - Configure MongoDB Atlas for production database
+   - Set up SSL certificates for HTTPS
+
+3. **Database (MongoDB Atlas):**
+   - Create production cluster
+   - Configure IP whitelist and users
+   - Set up automated backups
+   - Monitor performance and usage
+
+### Environment-Specific Configurations
+
+**Staging:**
+```env
+NODE_ENV=staging
+API_URL=https://api-staging.yourapp.com
+MONGODB_URI=mongodb+srv://staging-cluster...
 ```
-[...]
+
+**Production:**
+```env
+NODE_ENV=production
+API_URL=https://api.yourapp.com
+MONGODB_URI=mongodb+srv://production-cluster...
+JWT_SECRET=super-secure-production-secret
 ```
 
-These are normal warnings from MongoDB's WiredTiger storage engine. They can be safely ignored unless you experience actual data access issues.
+## 🧪 Testing
 
-## Repository Location
+### Frontend Testing
 
-This project is hosted on GitHub:
+```bash
+# Run all tests
+npm test
 
-[https://github.com/hkevin01/CONVENTION-APP](https://github.com/hkevin01/CONVENTION-APP)
+# Run tests in watch mode
+npm run test:watch
 
-## Contribution Guidelines
+# Run tests with coverage
+npm run test:coverage
 
-1. Fork the repository and create your branch from `main`.
-2. Ensure code is linted and formatted (`npm run lint` and `npm run format`).
-3. Add tests if applicable.
-4. Submit a pull request with a clear description of your changes.
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-## Cloning the Repository with GitHub CLI
-
-To clone this project using the GitHub CLI, run:
-
-```sh
-gh repo clone hkevin01/CONVENTION-APP
-cd CONVENTION-APP
+# Run specific test file
+npm test HomeScreen.test.tsx
 ```
 
-## GitHub CLI Configuration
+### Backend Testing
 
-This project supports the [GitHub CLI](https://cli.github.com/).
+```bash
+cd backend
 
-### Useful GitHub CLI Commands
+# Run API tests
+npm test
 
-- Clone the repo:
-  ```sh
-  gh repo clone hkevin01/CONVENTION-APP
-  cd CONVENTION-APP
+# Run integration tests
+npm run test:integration
+
+# Test with coverage
+npm run test:coverage
+```
+
+### End-to-End Testing
+
+```bash
+# Install E2E dependencies
+npm install -g detox-cli
+
+# Build app for testing
+npm run e2e:build
+
+# Run E2E tests
+npm run e2e:test
+```
+
+## 🛠️ Development Tools
+
+### Code Quality
+
+```bash
+# Lint code
+npm run lint
+
+# Fix linting issues
+npm run lint:fix
+
+# Format code
+npm run format
+
+# Type checking
+npm run type-check
+```
+
+### Debugging
+
+- **React Native Debugger**: Use for Redux, React DevTools, and network inspection
+- **Flipper**: Facebook's debugging platform for React Native
+- **Expo Dev Tools**: Built-in debugging and inspection tools
+
+### Useful Scripts
+
+```bash
+# Full stack development
+npm run fullstack
+
+# Stop all services
+npm run stop
+
+# Clean and reset
+npm run clean
+npm run reset-project
+
+# Database utilities
+npm run db:seed      # Seed with sample data
+npm run db:migrate   # Run migrations
+npm run db:reset     # Reset database
+```
+
+## 📁 Project Structure
+
+```
+CONVENTION-APP/
+├── 📱 Frontend (React Native/Expo)
+│   ├── src/
+│   │   ├── app/           # App router pages
+│   │   ├── components/    # Reusable UI components
+│   │   ├── constants/     # App constants and config
+│   │   ├── hooks/         # Custom React hooks
+│   │   └── api/           # API client and services
+│   ├── assets/            # Images, fonts, icons
+│   └── __tests__/         # Frontend tests
+│
+├── 🖥️ Backend (Node.js/Express)
+│   ├── src/
+│   │   ├── models/        # MongoDB schemas
+│   │   ├── routes/        # API endpoints
+│   │   ├── middleware/    # Custom middleware
+│   │   └── utils/         # Utility functions
+│   └── tests/             # Backend tests
+│
+├── 🐳 Docker
+│   ├── docker-compose.yml # Multi-service orchestration
+│   └── Dockerfiles        # Container definitions
+│
+├── 📚 Documentation
+│   ├── docs/              # Comprehensive guides
+│   ├── api/               # API documentation
+│   └── deployment/        # Deployment guides
+│
+└── 🛠️ Scripts & Config
+    ├── scripts/           # Automation scripts
+    ├── json/              # Configuration files
+    └── config files       # Babel, TypeScript, etc.
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these guidelines:
+
+### Getting Started
+
+1. **Fork the repository** and clone your fork
+2. **Create a feature branch** from `main`:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Install dependencies** and set up your environment
+4. **Make your changes** following our coding standards
+
+### Code Standards
+
+- **TypeScript**: Use TypeScript for all new code
+- **ESLint**: Follow the configured linting rules
+- **Prettier**: Format code consistently
+- **Commits**: Use conventional commit format:
+  ```
+  feat: add user authentication
+  fix: resolve navigation issue
+  docs: update API documentation
   ```
 
-- Create a new issue:
-  ```sh
-  gh issue create --title "Bug: ..." --body "Describe the bug..."
-  ```
+### Pull Request Process
 
-- Create a pull request:
-  ```sh
-  gh pr create --fill
-  ```
+1. **Update documentation** for any new features
+2. **Add tests** for new functionality
+3. **Ensure all tests pass**: `npm test`
+4. **Check code quality**: `npm run lint`
+5. **Submit PR** with clear description
 
-- View repo status:
-  ```sh
-  gh repo view --web
-  ```
+### Development Workflow
 
-### GitHub CLI Dotfiles
+1. **Issues**: Create issues for bugs and feature requests
+2. **Discussions**: Use GitHub Discussions for questions
+3. **Reviews**: All PRs require review before merging
+4. **Testing**: Maintain high test coverage
 
-A `.github` folder is already present for workflows.  
-You can add GitHub CLI configuration in your home directory as needed:
+For detailed contribution guidelines, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-- `~/.config/gh/hosts.yml` (for authentication)
-- `~/.config/gh/config.yml` (for CLI settings)
+## 📄 License
 
-See [GitHub CLI docs](https://cli.github.com/manual/) for more.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## After Pushing to GitHub
+## 📚 Documentation
 
-After you push your changes, you can view your repository at:
+Comprehensive documentation is available in the [`docs/`](docs/) directory:
 
-[https://github.com/hkevin01/CONVENTION-APP](https://github.com/hkevin01/CONVENTION-APP)
+- **[User Guide](docs/user-guide.md)** - How to use the app
+- **[Developer Guide](docs/developer-guide.md)** - Development setup and workflows  
+- **[API Documentation](docs/api.md)** - Backend API reference
+- **[Deployment Guide](docs/deployment.md)** - Production deployment
+- **[Contributing Guide](CONTRIBUTING.md)** - How to contribute
 
-## How to Approve (Okay) a Commit or Pull Request on GitHub
+## 🔗 Links & Resources
 
-1. Go to your repository on [GitHub](https://github.com/hkevin01/CONVENTION-APP).
-2. Click on the "Pull requests" tab.
-3. Select the pull request you want to review.
-4. Review the changes (files, diffs, etc.).
-5. Click the "Review changes" button (top right).
-6. Choose "Approve" and optionally add a comment.
-7. Click "Submit review".
+- **Repository**: [https://github.com/hkevin01/CONVENTION-APP](https://github.com/hkevin01/CONVENTION-APP)
+- **Documentation**: [GitHub Pages](https://hkevin01.github.io/CONVENTION-APP)
+- **Issues**: [GitHub Issues](https://github.com/hkevin01/CONVENTION-APP/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/hkevin01/CONVENTION-APP/discussions)
 
-If you want to merge the pull request after approving:
-- Click the "Merge pull request" button.
+### Technology Documentation
+
+- **[React Native](https://reactnative.dev/docs/getting-started)** - Mobile framework
+- **[Expo](https://docs.expo.dev/)** - Development platform
+- **[Node.js](https://nodejs.org/docs/)** - Backend runtime
+- **[MongoDB](https://docs.mongodb.com/)** - Database
+- **[Express.js](https://expressjs.com/)** - Web framework
+
+## ❓ Support & FAQ
+
+### Common Issues
+
+**Q: App won't start in Expo Go**
+```bash
+# Clear Expo cache
+expo start -c
+```
+
+**Q: Backend connection refused**
+```bash
+# Check if backend is running
+curl http://localhost:4000/api/health
+
+# Restart backend
+cd backend && npm run dev
+```
+
+**Q: MongoDB connection error**
+```bash
+# Check MongoDB status
+mongod --dbpath /path/to/your/db
+
+# Or use MongoDB Atlas cloud service
+```
+
+**Q: Dependencies not installing**
+```bash
+# Clear npm cache
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Getting Help
+
+- **Create an Issue**: For bugs and feature requests
+- **GitHub Discussions**: For questions and community support
+- **Documentation**: Check the docs/ folder first
+- **Stack Overflow**: Tag with `convention-app` for community help
+
+---
+
+## 🙏 Acknowledgments
+
+- Built with [Expo](https://expo.dev) and [React Native](https://reactnative.dev)
+- Icons by [Expo Vector Icons](https://icons.expo.fyi)
+- UI inspiration from modern convention apps
+- Community contributions and feedback
+
+---
+
+**Made with ❤️ for the convention community**
+
+> Convention App - Connecting people, one event at a time 🎭
