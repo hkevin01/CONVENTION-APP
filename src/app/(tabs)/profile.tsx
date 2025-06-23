@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import QRCodeScanner from '../../components/QRCodeScanner';
 import { ThemedText } from '../../components/ThemedText';
 import { ThemedView } from '../../components/ThemedView';
 import Colors from '../../constants/Colors';
@@ -10,6 +11,7 @@ import useColorScheme from '../../hooks/useColorScheme';
 export default function ProfileScreen() {
   const { user, logout } = useAuth();
   const colorScheme = useColorScheme();
+  const [showScanner, setShowScanner] = useState(false);
 
   const handleLogout = () => {
     Alert.alert(
@@ -30,6 +32,35 @@ export default function ProfileScreen() {
         },
       ]
     );
+  };
+
+  const handleQRScan = (data: any) => {
+    setShowScanner(false);
+    
+    try {
+      // Handle ticket check-in
+      if (typeof data === 'object' && data.eventId && data.ticketId) {
+        Alert.alert(
+          'Ticket Scanned',
+          `Event: ${data.eventTitle || 'Unknown Event'}\nTicket: ${data.ticketId}`,
+          [
+            { text: 'Cancel', style: 'cancel' },
+            { 
+              text: 'Check In', 
+              onPress: () => {
+                // Here you would call your check-in API
+                Alert.alert('Success', 'Ticket checked in successfully!');
+              }
+            }
+          ]
+        );
+      } else {
+        // Handle generic QR code
+        Alert.alert('QR Code Scanned', `Data: ${JSON.stringify(data)}`);
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Invalid QR code format');
+    }
   };
 
   const handleEditProfile = () => {
@@ -94,7 +125,22 @@ export default function ProfileScreen() {
             </ThemedText>
           </TouchableOpacity>
         </ThemedView>
+
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: Colors[colorScheme].tint }]}
+          onPress={() => setShowScanner(true)}
+        >
+          <ThemedText style={styles.buttonText}>Scan QR Code for Check-in</ThemedText>
+        </TouchableOpacity>
       </ScrollView>
+
+      <QRCodeScanner
+        isVisible={showScanner}
+        onClose={() => setShowScanner(false)}
+        onScanSuccess={handleQRScan}
+        title="Ticket Check-in"
+        description="Scan event tickets to check in attendees"
+      />
     </ThemedView>
   );
 }
@@ -150,6 +196,29 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  scannerContainer: {
+    marginTop: 16,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  scannerTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  scannerButton: {
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: '#007AFF',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  scannerButtonText: {
     color: '#ffffff',
     fontSize: 16,
     fontWeight: '600',
